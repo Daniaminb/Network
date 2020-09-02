@@ -2,7 +2,7 @@
 Simple echo clinet/server with C++
 ## Compile the program
 Use below command line:
-    'g++ -I ./Include/ -o main ./Source/*.cpp'
+    `g++ -I ./Include/ -o main ./Source/*.cpp`
 ## Run the program
 Use: ./main arg1 arg2
 * arg 1 is ip of machine (for example localhost)
