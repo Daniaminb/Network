@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Host.h"
+#include "Server.h"
 #include "Exception.h"
 using namespace std;
 int main(int argc, char* argv[])
@@ -9,10 +9,10 @@ int main(int argc, char* argv[])
         return 0;
     }
     else if (argc < 4){
-        Host* host = new Host(argv[1], argv[2], 0);
+        Server* server_host = new Server(argv[1], argv[2],1);
         try
         {
-            host->bindHost();
+            server_host->bindHost();
         }
         catch(BindException e)
         {
@@ -20,16 +20,7 @@ int main(int argc, char* argv[])
         }
         try
         {
-            host->listening();
-        }
-        catch(ListenException e)
-        {
-            cout << e.what() << endl;
-        }
-        int client = host->acceptClient();
-        try
-        {
-            host->tcp_recieveBytes(client);
+            server_host->udp_recieveBytes();
         }
         catch(RecieveException e)
         {
