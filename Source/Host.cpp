@@ -5,11 +5,12 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <string.h>
+#include <unistd.h>
 
-Host::Host(int host_socket, string ping, string portNumber)
+Host::Host(string ip, string portNumber)
 {
-    this->host_socket = host_socket;
-    inet_pton(AF_INET, ping.c_str(), &this->host_address.sin_addr.s_addr);
+    this->host_socket = socket(AF_INET, SOCK_STREAM, 0);
+    inet_pton(AF_INET, ip.c_str(), &this->host_address.sin_addr.s_addr);
     this->host_address.sin_port = htons(atoi(portNumber.c_str()));
     this->host_address.sin_family = AF_INET;
     sock_leng = sizeof(this->host_address);
@@ -59,14 +60,17 @@ void Host::recieveBytes(int client_socket)
     char buffer[256];
     while(true)
     {
+        cout << "Server is wating for recieving message" << endl;
         memset(buffer, 0, 256);
         ssize_t byte_recieve = recv(client_socket, buffer, 256, 0);
         if (byte_recieve <= 0) throw(RecieveException());
         else
         {
-            cout << "Recived message  =  " << string(buffer, 0, byte_recieve);
+            cout << "Server recived message  =  " << string(buffer, 0, byte_recieve);
             sendBytes(client_socket, string(buffer, 0, byte_recieve));
         }
 
     }
 }
+
+

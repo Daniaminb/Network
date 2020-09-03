@@ -20,6 +20,11 @@ class ListenException:public exception
         const char* what() const throw();
 };
 
+class RequestServerException:public exception
+{
+    public:
+        const char* what() const throw();
+};
 
 
 #endif // Exception_H

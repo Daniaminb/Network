@@ -15,4 +15,10 @@ const char* ListenException::what() const throw()
     return "Listening Exception";
 }
 
+const char* RequestServerException::what() const throw()
+{
+    return "Request Exception";
+}
+
+
 
