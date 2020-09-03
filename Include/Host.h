@@ -9,14 +9,15 @@ using namespace std;
 class Host
 {
     public:
-        Host(int host_socket, string ping, string portNumber);
+        Host(string ip, string portNumber);
         int getHostSocket();
         void bindHost();
         int acceptClient();
         void sendBytes(int client_socket, string message);
-        void recieveBytes(int client_socket);
+        virtual void recieveBytes(int client_socket);
         void closeSocket(int socket_id);
         void listening();
+        
 
     protected:
 
