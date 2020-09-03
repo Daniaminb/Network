@@ -12,10 +12,23 @@ Use below command lines:
 
 After that, use telnet to connect to server
 
-## Use client/server
+## Use tcp client/server
 
-    g++  -o client -I ./Include/ ./Source/Host.cpp ./Source/Exception.cpp ./Source/Client.cpp  ./Source/client_main.cpp
-    g++ -o server -I ./Include/ ./Source/Host.cpp  ./Source/Exception.cpp ./Source/Server.cpp ./Source/server_main.cpp
+    g++  -o client -I ./Include/ ./Source/Host.cpp ./Source/Exception.cpp ./Source/Client.cpp  ./Main/tcp_client_main.cpp
+    g++ -o server -I ./Include/ ./Source/Host.cpp  ./Source/Exception.cpp ./Source/Server.cpp ./Main/tcp_server_main.cpp
+    ./server arg1 arg2
+    ./client arg3 arg4 arg5 arg6
+* arg1 is ip of server (for example localhost - "127.0.0.1")
+* arg2 is port of server (for example 4500)
+* arg3 is ip of client (for further implementation)
+* arg4 is port of client (for further implementation)
+* arg5 is server's ip
+* arg6 is server's port
+
+## Use udp client/server
+
+    g++  -o client -I ./Include/ ./Source/Host.cpp ./Source/Exception.cpp ./Source/Client.cpp  ./Main/udp_client_main.cpp
+    g++ -o server -I ./Include/ ./Source/Host.cpp  ./Source/Exception.cpp ./Source/Server.cpp ./Main/udp_server_main.cpp
     ./server arg1 arg2
     ./client arg3 arg4 arg5 arg6
 * arg1 is ip of server (for example localhost - "127.0.0.1")

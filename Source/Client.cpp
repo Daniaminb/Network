@@ -3,7 +3,7 @@
 #include <arpa/inet.h>
 #include <iostream>
 
-Client::Client(string ip, string portNumber): super(ip, portNumber){
+Client::Client(string ip, string portNumber, uint8_t type): super(ip, portNumber, type){
 }
 
 int Client::requestServer(string server_ip, string serverPort)
@@ -27,7 +27,7 @@ int Client::requestServer(string server_ip, string serverPort)
     return session_sock;
 }
 
-void Client::recieveBytes(int client_socket) 
+void Client::tcp_recieveBytes(int client_socket) 
 {
     using namespace std;
     char buffer[256];
@@ -38,4 +38,23 @@ void Client::recieveBytes(int client_socket)
     {
         cout << "Client recived message =  " << string(buffer, 0, byte_recieve);
     }
+}
+
+void Client::udp_recieveBytes()
+{
+    char buffer[256];
+    memset(buffer, 0, 256);
+    struct sockaddr_in src_address;
+    socklen_t src_address_len = sizeof(src_address);
+    ssize_t byte_recieve;
+    byte_recieve = recvfrom(getHostSocket(), buffer, 256, 0, (struct sockaddr *)&src_address, &src_address_len);
+    if (byte_recieve <= 0)
+    {
+        throw(RecieveException());
+    }
+    else
+    {
+         cout << "Client recived message  =  " << string(buffer, 0, byte_recieve);
+    }
+
 }

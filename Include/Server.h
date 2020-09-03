@@ -5,7 +5,7 @@
 class Server:public Host
 {
     public:
-        Server(string ip, string portNumber);
+        Server(string ip, string portNumber, uint8_t type);
     private:
         typedef Host super;
 };

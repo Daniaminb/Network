@@ -9,12 +9,14 @@ using namespace std;
 class Host
 {
     public:
-        Host(string ip, string portNumber);
+        Host(string ip, string portNumber, uint8_t type);
         int getHostSocket();
         void bindHost();
         int acceptClient();
-        void sendBytes(int client_socket, string message);
-        virtual void recieveBytes(int client_socket);
+        void tcp_sendBytes(int client_socket, string message);
+        virtual void tcp_recieveBytes(int client_socket);
+        void udp_sendBytes(string message, sockaddr_in des_address);
+        virtual void udp_recieveBytes();
         void closeSocket(int socket_id);
         void listening();
         
